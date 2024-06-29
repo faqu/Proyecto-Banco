@@ -1,0 +1,29 @@
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.oracle',
+        'NAME': 'xe',
+        'USER': 'c##Fabian',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '1521',
+    }
+}
+
+class Roles(models.Model):
+    idroles = models.AutoField(primary_key=True)
+    nombre_rol = models.CharField(max_length=100)
+    fecha_de_registro = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.nombre_rol
+
+class Login(models.Model):
+    idlogin = models.AutoField(primary_key=True)
+    correo = models.CharField(max_length=255)
+    contrasena = models.CharField(max_length=100)
+    fecha_registro = models.DateField(auto_now_add=True)
+    fk_roles = models.ForeignKey(Roles, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.correo} - {self.idlogintype}"
+c##Fabian 1234
